@@ -41,7 +41,7 @@ RUN cd /opt/PowerDNS-Admin && \
         sed "s,SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@192.168.59.103/pdns',SQLALCHEMY_DATABASE_URI = 'mysql://$PDNSADMIN_DBUSER:$PDNSADMIN_DBPASS@$PDNSADMIN_DBHOST/$PDNSADMIN_DBNAME',g" -i $PDNSADMIN_DIR/config.py && \
         sed "s,PORT = 9393,PORT = $PDNSADMIN_PORT,g" -i $PDNSADMIN_DIR/config.py
 
-VOLUME /opt/PowerDNS-Admin
+# VOLUME /opt/PowerDNS-Admin
 WORKDIR /opt/PowerDNS-Admin
 EXPOSE $PDNSADMIN_PORT
 
