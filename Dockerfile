@@ -15,6 +15,7 @@ ENV PDNSADMIN_DBUSER powerdnsadmin
 ENV PDNSADMIN_DBPASS p4ssw0rd
 ENV PDNSADMIN_DBHOST 192.168.0.1
 ENV PDNSADMIN_DBNAME powerdnsadmin
+ENV PDNS_VERSION 4.0.0
 
 # More configuration variables, these don't need to be modified
 ENV PDNSADMIN_DIR /opt/PowerDNS-Admin
