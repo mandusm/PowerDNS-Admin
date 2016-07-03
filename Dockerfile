@@ -45,4 +45,6 @@ RUN cd /opt/PowerDNS-Admin && \
 WORKDIR /opt/PowerDNS-Admin
 EXPOSE $PDNSADMIN_PORT
 
-ENTRYPOINT /opt/PowerDNS-Admin/run.py
+ADD docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
