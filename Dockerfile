@@ -4,6 +4,9 @@ FROM ubuntu
 MAINTAINER PowerDNS-Admin Team
 RUN apt-get update
 
+RUN chmod +x docker-entrypoint.sh
+ADD docker-entrypoint.sh /
+
 # Configuration variables, set these before building the container
 ENV PDNSADMIN_PORT 9393
 ENV PDNSADMIN_APIURL http://127.0.0.1:8081/
@@ -45,6 +48,6 @@ RUN cd /opt/PowerDNS-Admin && \
 WORKDIR /opt/PowerDNS-Admin
 EXPOSE $PDNSADMIN_PORT
 
-ADD docker-entrypoint.sh /
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
