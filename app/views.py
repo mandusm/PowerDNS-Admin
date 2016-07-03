@@ -6,7 +6,7 @@ import pyqrcode
 import base64
 
 from functools import wraps
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, logout_user, current_user, login_required
 from flask import Flask, g, request, make_response, jsonify, render_template, session, redirect, url_for, send_from_directory
 from werkzeug import secure_filename
 
@@ -233,7 +233,7 @@ def dashboard():
     domain_count = Domain.query.count()
     users = User.query.all()
     history_number = History.query.count()
-    history = History.query.order_by("created_on desc").limit(4)
+    history = History.query.order_by(History.created_on.desc()).limit(4)
     server = Server(server_id='localhost')
     statistics = server.get_statistic()
     if statistics:
@@ -658,7 +658,7 @@ def qrcode():
 @app.route('/nic/checkip.html', methods=['GET', 'POST'])
 def dyndns_checkip():
     # route covers the default ddclient 'web' setting for the checkip service
-    return render_template('dyndns.html', response=request.headers.get('X-Real-IP'))
+    return render_template('dyndns.html', response=request.environ.get('HTTP_X_REAL_IP', request.remote_addr))
 
 @app.route('/nic/update', methods=['GET', 'POST'])
 @dyndns_login_required
