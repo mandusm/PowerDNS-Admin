@@ -9,7 +9,7 @@ PORT = 9393
 LOGIN_TITLE = "PDNS"
 
 # TIMEOUT - for large zones
-TIMEOUT = 10
+TIMEOUT = 60
 
 # LOG CONFIG 
 LOG_LEVEL = 'DEBUG'
@@ -43,4 +43,4 @@ PDNS_API_KEY = 'you never know'
 PDNS_VERSION = '3.4.7'
 
 # RECORDS ALLOWED TO EDIT
-RECORDS_ALLOW_EDIT = ['A', 'AAAA', 'CNAME', 'SPF', 'PTR', 'MX', 'TXT']
+RECORDS_ALLOW_EDIT = ['A', 'AAAA', 'CNAME', 'SPF', 'PTR', 'MX', 'TXT', 'SRV', 'SOA', 'NS']
