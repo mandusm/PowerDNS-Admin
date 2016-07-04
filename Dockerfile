@@ -24,7 +24,7 @@ ENV PDNSADMIN_DIR /opt/PowerDNS-Admin
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install dependencies
-RUN apt-get install -y git python-pip python-dev libmysqlclient-dev libsasl2-dev libldap2-dev libssl-dev
+RUN DEBIAN_FRONTEND=noninteractive apt install -y mysql-client git python-pip python-dev libmysqlclient-dev libsasl2-dev libldap2-dev libssl-dev
 
 # Create directories
 RUN mkdir -p $PDNSADMIN_DIR
