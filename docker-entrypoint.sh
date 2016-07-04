@@ -15,7 +15,8 @@ sed "s,PDNS_API_KEY = 'you never know',PDNS_API_KEY = '$PDNSADMIN_APIKEY',g" -i 
 sed "s,PDNS_VERSION = '3.4.7',PDNS_VERSION = '$PDNS_VERSION',g" -i $PDNSADMIN_DIR/config.py
 sed "s,SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@192.168.59.103/pdns',SQLALCHEMY_DATABASE_URI = 'mysql://$PDNS_ADMIN_USER:$PDNS_ADMIN_PASSWORD@$MYSQL_DATABASE_HOST/$PDNS_ADMIN_DATABASE',g" -i $PDNSADMIN_DIR/config.py
 sed "s,PORT = 9393,PORT = $PDNSADMIN_PORT,g" -i $PDNSADMIN_DIR/config.py
-
+sed "s,TIMEOUT = 10,TIMEOUT = 60,g" -i $PDNSADMIN_DIR/config.py
+sed "s,RECORDS_ALLOW_EDIT = ['A', 'AAAA', 'CNAME', 'SPF', 'PTR', 'MX', 'TXT'],RECORDS_ALLOW_EDIT = ['A', 'AAAA', 'CNAME', 'SPF', 'PTR', 'MX', 'TXT', 'SRV', 'SOA', 'NS'],g" -i $PDNSADMIN_DIR/config.py
 
 echo "Starting APP"
 /opt/PowerDNS-Admin/run.py
