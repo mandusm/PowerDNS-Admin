@@ -155,11 +155,11 @@
                   </td>
                   <td>
                     {% if domain.dnssec %}
-                    <button type="button" class="btn btn-flat dnssec btn-success button_dnssec col-md-6" id="{{ domain.name }}">
+                    <button type="button" class="btn btn-flat dnssec btn-success button_dnssec" id="{{ domain.name }}" style="width:100%;">
                         <i class="fa fa-lock"></i>&nbsp;Enabled
                     </button>
                     {% else %}
-                    <button type="button" class="btn btn-flat dnssec button_dnssec col-md-6" id="{{ domain.name }}">
+                    <button type="button" class="btn btn-flat dnssec button_dnssec" id="{{ domain.name }}" style="width:100%;">
                         <i class="fa fa-unlock-alt"></i>&nbsp;Disabled
                     </button>
                     {% endif %}
@@ -214,14 +214,23 @@
         "ordering" : false,
         "info" : false,
         "autoWidth" : false
-    });
+    });   
+    // set up domain list
     $("#tbl_domain_list").DataTable({
         "paging" : true,
         "lengthChange" : true,
         "searching" : true,
         "ordering" : true,
         "info" : false,
-        "autoWidth" : false
+        "autoWidth" : false,
+	    {% if default_domain_table_size_setting in ['10','25','50','100'] %}
+	    "lengthMenu": [ [10, 25, 50, 100, -1],
+	                    [10, 25, 50, 100, "All"]],
+	    {% else %}
+	    "lengthMenu": [ [10, 25, 50, 100, {{ default_domain_table_size_setting }}, -1],
+	                    [10, 25, 50, 100, {{ default_domain_table_size_setting }}, "All"]],
+	    {% endif %}
+	    "pageLength": {{ default_domain_table_size_setting }}
     });
     $(document.body).on('click', '.history-info-button', function() {
         var modal = $("#modal_history_info");
@@ -231,7 +240,7 @@
     });
     $(document.body).on("click", ".button_dnssec", function() {
         var domain = $(this).prop('id');
-        getdnssec('/domain/' + domain + '/dnssec');
+        getdnssec($SCRIPT_ROOT + '/domain/' + domain + '/dnssec');
     });
 </script>
 {% endblock %}
